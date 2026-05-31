@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noticias | Club Squash Algemesí</title>
+  <meta name="description" content="Últimas noticias, torneos y novedades del Club Squash Algemesí." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg1)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg1)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg1)"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div>
+        <span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Inicio</a></li>
+        <li><a href="instalaciones.html" class="nav-link">Instalaciones</a></li>
+        <li><a href="noticias.html" class="nav-link active">Noticias</a></li>
+        <li><a href="equipo.html" class="nav-link">Equipo</a></li>
+        <li><a href="subvenciones.html" class="nav-link">Subvenciones</a></li>
+      </ul>
+      <a href="index.html#contacto" class="nav-cta">Únete al club</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header short">
+    <div class="page-header-bg">
+      <img src="squash_hero.png" alt="Noticias Club Squash" class="page-header-img" />
+      <div class="page-header-overlay"></div>
+    </div>
+    <div class="container page-header-content">
+      <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Noticias</span></div>
+      <h1 class="page-title">Noticias del <span class="gradient-text">Club</span></h1>
+      <p class="page-subtitle">Mantente al día con todo lo que pasa en el Club Squash Algemesí.</p>
+    </div>
+  </header>
+
+  <!-- FILTROS -->
+  <section class="section" id="noticias-section">
+    <div class="container">
+      <div class="news-filters" id="news-filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="torneo">Torneos</button>
+        <button class="filter-btn" data-filter="formacion">Formación</button>
+        <button class="filter-btn" data-filter="club">Club</button>
+        <button class="filter-btn" data-filter="juvenil">Juvenil</button>
+      </div>
+
+      <div class="news-grid-full" id="news-grid">
+
+        <article class="news-card-full" data-cat="torneo" id="news-f1">
+          <div class="ncf-img">
+            <img src="squash_hero.png" alt="Torneo Open CSA" />
+            <span class="news-tag tournament">Torneo</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 15 mayo 2026</span></div>
+            <h2 class="ncf-title">Gran éxito en el III Torneo Open CSA Algemesí</h2>
+            <p class="ncf-excerpt">Más de 60 participantes de toda la Comunitat Valenciana se dieron cita en nuestras instalaciones para disputar el torneo más importante de la temporada. Un espectáculo de squash de altísimo nivel que dejó grandes momentos y un ambiente inmejorable entre los aficionados. El campeón de la categoría absoluta fue Marc Ferrer, seguido de cerca por Ana Soler en la categoría femenina.</p>
+            <a href="#" class="news-link">Leer artículo completo →</a>
+          </div>
+        </article>
+
+        <article class="news-card-full" data-cat="formacion" id="news-f2">
+          <div class="ncf-img">
+            <img src="squash_court_1.png" alt="Clases iniciación" />
+            <span class="news-tag training">Formación</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 8 mayo 2026</span></div>
+            <h2 class="ncf-title">Nuevas clases de iniciación para adultos — ¡Plazas disponibles!</h2>
+            <p class="ncf-excerpt">¿Nunca has jugado al squash? ¡Es el momento! Arrancamos una nueva tanda de clases de iniciación todos los martes y jueves de 19:00 a 20:00h. Las clases están dirigidas por nuestro entrenador titulado Jordi Martínez y son perfectas para quien quiera descubrir este deporte desde cero. El material está incluido.</p>
+            <a href="index.html#contacto" class="news-link">Apuntarse →</a>
+          </div>
+        </article>
+
+        <article class="news-card-full" data-cat="club" id="news-f3">
+          <div class="ncf-img">
+            <img src="squash_court_2.png" alt="Renovación pistas" />
+            <span class="news-tag club">Club</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 1 mayo 2026</span></div>
+            <h2 class="ncf-title">Renovación completada: las pistas 3 y 4 estrenan nuevo look</h2>
+            <p class="ncf-excerpt">Tras semanas de trabajo, nuestras pistas 3 y 4 estrenan nuevo suelo de parquet de alta calidad y un sistema de iluminación LED de última generación. La renovación también ha incluido la pintura de las paredes y el reemplazo del sistema de ventilación. Las pistas están disponibles para reserva a partir de esta semana.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </article>
+
+        <article class="news-card-full" data-cat="juvenil" id="news-f4">
+          <div class="ncf-img">
+            <img src="squash_team.png" alt="Equipo juvenil" />
+            <span class="news-tag youth">Juvenil</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 20 abril 2026</span></div>
+            <h2 class="ncf-title">Nuestros juveniles, brillante subcampeones de la Comunitat</h2>
+            <p class="ncf-excerpt">El equipo junior del CSA Algemesí logró una brillante segunda posición en el Campeonato Autonómico Juvenil celebrado en Valencia. Tres de nuestros jugadores fueron seleccionados para la selección valenciana. Un resultado histórico para el club que demuestra el excelente trabajo de la cantera y el programa de tecnificación.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </article>
+
+        <article class="news-card-full" data-cat="torneo" id="news-f5">
+          <div class="ncf-img">
+            <img src="squash_court_1.png" alt="Liga interna" />
+            <span class="news-tag tournament">Torneo</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 5 abril 2026</span></div>
+            <h2 class="ncf-title">Liga interna de primavera — Clasificación actualizada</h2>
+            <p class="ncf-excerpt">La liga interna de primavera está en su ecuador y la competición no puede estar más igualada. Con 24 participantes repartidos en 4 grupos, las sorpresas están siendo continuas. Puedes consultar la clasificación actualizada en el tablón de anuncios del club o pidiéndola en recepción.</p>
+            <a href="#" class="news-link">Ver clasificación →</a>
+          </div>
+        </article>
+
+        <article class="news-card-full" data-cat="club" id="news-f6">
+          <div class="ncf-img">
+            <img src="squash_racket.png" alt="Tienda oficial" />
+            <span class="news-tag club">Club</span>
+          </div>
+          <div class="ncf-body">
+            <div class="news-meta"><span class="news-date">📅 15 marzo 2026</span></div>
+            <h2 class="ncf-title">Nueva colección primavera en la tienda oficial del club</h2>
+            <p class="ncf-excerpt">Ya está disponible la nueva colección de primavera en nuestra tienda oficial. Nuevas raquetas Tecnifibre, ropa técnica Head y las codiciadas pelotas Dunlop Pro están esperándote. Los socios premium recuerden que tienen un 10% de descuento en todos los artículos de la tienda.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg2)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div><span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span></a>
+          <p class="footer-tagline">El club de squash de referencia en la Ribera Alta.</p>
+        </div>
+        <div class="footer-links"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="instalaciones.html">Instalaciones</a></li><li><a href="noticias.html">Noticias</a></li><li><a href="equipo.html">Equipo</a></li><li><a href="subvenciones.html">Subvenciones</a></li></ul></div>
+        <div class="footer-links"><h4>Club</h4><ul><li><a href="#">Junta directiva</a></li><li><a href="#">Historia</a></li><li><a href="#">Federació Valenciana</a></li></ul></div>
+        <div class="footer-newsletter"><h4>Newsletter</h4><p>Recibe noticias y torneos en tu correo.</p><form class="newsletter-form" novalidate><input type="email" placeholder="tu@email.com" /><button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></form></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p>© 2026 Club Squash Algemesí. Tots els drets reservats.</p><div class="footer-legal"><a href="#">Política de privacidad</a><a href="#">Aviso legal</a></div></div></div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+  <script src="script.js"></script>
+  <script>
+    // News filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const newsCards = document.querySelectorAll('.news-card-full');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        newsCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.cat === filter;
+          card.style.display = show ? '' : 'none';
+          card.style.animation = show ? 'fadeUp 0.4s ease' : '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
