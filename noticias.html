@@ -30,8 +30,8 @@
 
     .news-card-v2:hover {
       transform: translateY(-6px);
-      border-color: var(--border-green);
-      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.18);
+      border-color: var(--border-blue);
+      box-shadow: 0 16px 40px rgba(51, 43, 128, 0.2);
     }
 
     .news-card-v2:hover .ncv2-img img {
@@ -76,7 +76,7 @@
 
     .ncv2-tag.torneo   { background: rgba(251,191,36,0.9); color: #78350f; }
     .ncv2-tag.formacion{ background: rgba(96,165,250,0.9); color: #1e3a5f; }
-    .ncv2-tag.club     { background: rgba(74,222,128,0.9); color: #052e16; }
+    .ncv2-tag.club     { background: rgba(74,64,168,0.9); color: #08051a; }
     .ncv2-tag.juvenil  { background: rgba(167,139,250,0.9); color: #2e1065; }
 
     .ncv2-body {
@@ -100,7 +100,7 @@
       display: inline-block;
       width: 16px;
       height: 1.5px;
-      background: var(--green-400);
+      background: var(--blue-400);
       border-radius: 2px;
     }
 
@@ -141,7 +141,7 @@
       gap: 6px;
       font-size: 0.83rem;
       font-weight: 700;
-      color: var(--green-400);
+      color: var(--blue-400);
       transition: gap 0.2s ease;
     }
 
@@ -188,7 +188,7 @@
 
     .news-modal {
       background: #0f1a12;
-      border: 1px solid var(--border-green);
+      border: 1px solid var(--border-blue);
       border-radius: var(--radius-xl);
       max-width: 760px;
       width: 100%;
@@ -197,7 +197,7 @@
       position: relative;
       transform: translateY(40px) scale(0.96);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(34,197,94,0.1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(51,43,128,0.2);
     }
 
     .news-modal-overlay.active .news-modal {
@@ -207,7 +207,7 @@
     /* Custom scrollbar inside modal */
     .news-modal::-webkit-scrollbar { width: 5px; }
     .news-modal::-webkit-scrollbar-track { background: transparent; }
-    .news-modal::-webkit-scrollbar-thumb { background: var(--border-green); border-radius: 4px; }
+    .news-modal::-webkit-scrollbar-thumb { background: var(--border-blue); border-radius: 4px; }
 
     .modal-img-wrap {
       position: relative;
@@ -262,7 +262,7 @@
 
     .modal-close:hover {
       background: rgba(74,222,128,0.15);
-      border-color: var(--green-400);
+      border-color: var(--blue-400);
       transform: rotate(90deg);
     }
 
@@ -323,7 +323,7 @@
     }
 
     .modal-content strong {
-      color: var(--green-400);
+      color: var(--blue-400);
       font-weight: 700;
     }
 
@@ -358,14 +358,14 @@
     }
 
     .filter-btn:hover {
-      border-color: var(--border-green);
+      border-color: var(--border-blue);
       color: var(--text-primary);
     }
 
     .filter-btn.active {
       background: var(--gradient);
       border-color: transparent;
-      color: #052e16;
+      color: #08051a;
     }
 
     /* ── FEATURED ROW ── */
@@ -394,8 +394,7 @@
   <nav class="navbar scrolled" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg1)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg1)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg1)"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div>
-        <span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span>
+        <img src="logo_csa_blanco.png" alt="Club Squash Algemesí" style="height: 48px; width: auto;" />
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="nav-link">Inicio</a></li>
@@ -563,7 +562,7 @@
     <div class="footer-top">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="nav-logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg2)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div><span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span></a>
+          <a href="index.html" class="nav-logo"><img src="logo_csa_blanco.png" alt="Club Squash Algemesí" style="height: 40px; width: auto;" /></a>
           <p class="footer-tagline">El club de squash de referencia en la Ribera Alta.</p>
         </div>
         <div class="footer-links"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="instalaciones.html">Instalaciones</a></li><li><a href="noticias.html">Noticias</a></li><li><a href="subvenciones.html">Subvenciones</a></li></ul></div>
