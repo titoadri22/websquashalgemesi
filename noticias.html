@@ -9,6 +9,385 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── NEWS CARDS ── */
+    .news-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .news-card-v2 {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card-v2:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-green);
+      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.18);
+    }
+
+    .news-card-v2:hover .ncv2-img img {
+      transform: scale(1.07);
+    }
+
+    .ncv2-img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .news-card-v2.large .ncv2-img {
+      height: 260px;
+    }
+
+    .ncv2-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .ncv2-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,13,10,0.7) 0%, transparent 55%);
+    }
+
+    .ncv2-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .ncv2-tag.torneo   { background: rgba(251,191,36,0.9); color: #78350f; }
+    .ncv2-tag.formacion{ background: rgba(96,165,250,0.9); color: #1e3a5f; }
+    .ncv2-tag.club     { background: rgba(74,222,128,0.9); color: #052e16; }
+    .ncv2-tag.juvenil  { background: rgba(167,139,250,0.9); color: #2e1065; }
+
+    .ncv2-body {
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .ncv2-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ncv2-date::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 1.5px;
+      background: var(--green-400);
+      border-radius: 2px;
+    }
+
+    .ncv2-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .news-card-v2.large .ncv2-title {
+      font-size: 1.2rem;
+    }
+
+    .ncv2-excerpt {
+      font-size: 0.88rem;
+      color: rgba(240,253,244,0.55);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 18px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ncv2-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .ncv2-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--green-400);
+      transition: gap 0.2s ease;
+    }
+
+    .news-card-v2:hover .ncv2-read-btn {
+      gap: 10px;
+    }
+
+    .ncv2-read-btn svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .news-card-v2:hover .ncv2-read-btn svg {
+      transform: translateX(3px);
+    }
+
+    .ncv2-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ── MODAL OVERLAY ── */
+    .news-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 9, 7, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .news-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .news-modal {
+      background: #0f1a12;
+      border: 1px solid var(--border-green);
+      border-radius: var(--radius-xl);
+      max-width: 760px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(40px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(34,197,94,0.1);
+    }
+
+    .news-modal-overlay.active .news-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Custom scrollbar inside modal */
+    .news-modal::-webkit-scrollbar { width: 5px; }
+    .news-modal::-webkit-scrollbar-track { background: transparent; }
+    .news-modal::-webkit-scrollbar-thumb { background: var(--border-green); border-radius: 4px; }
+
+    .modal-img-wrap {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0f1a12 0%, transparent 50%);
+    }
+
+    .modal-img-tag {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 1;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      background: rgba(8,13,10,0.8);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .modal-close:hover {
+      background: rgba(74,222,128,0.15);
+      border-color: var(--green-400);
+      transform: rotate(90deg);
+    }
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .modal-body {
+      padding: 28px 36px 40px;
+    }
+
+    .modal-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .modal-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .modal-read-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .modal-content p {
+      font-size: 0.97rem;
+      color: rgba(240,253,244,0.72);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .modal-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-content strong {
+      color: var(--green-400);
+      font-weight: 700;
+    }
+
+    .modal-actions {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ── FILTERS ── */
+    .news-filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-green);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--gradient);
+      border-color: transparent;
+      color: #052e16;
+    }
+
+    /* ── FEATURED ROW ── */
+    .news-featured-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .news-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .news-featured-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .news-cards-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 20px 20px 32px; }
+      .modal-img-wrap { height: 200px; }
+      .modal-title { font-size: 1.3rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,7 +404,7 @@
         <li><a href="equipo.html" class="nav-link">Equipo</a></li>
         <li><a href="subvenciones.html" class="nav-link">Subvenciones</a></li>
       </ul>
-      <a href="index.html#contacto" class="nav-cta">Únete al club</a>
+      <a href="equipo.html" class="nav-cta">Únete al club</a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -39,100 +418,149 @@
     <div class="container page-header-content">
       <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Noticias</span></div>
       <h1 class="page-title">Noticias del <span class="gradient-text">Club</span></h1>
-      <p class="page-subtitle">Mantente al día con todo lo que pasa en el Club Squash Algemesí.</p>
+      <p class="page-subtitle">Todo lo que pasa en el CSA Algemesí. Torneos, resultados y vida del club.</p>
     </div>
   </header>
 
-  <!-- FILTROS -->
+  <!-- NOTICIAS -->
   <section class="section" id="noticias-section">
     <div class="container">
+
+      <!-- Filtros -->
       <div class="news-filters" id="news-filters">
-        <button class="filter-btn active" data-filter="all">Todas</button>
-        <button class="filter-btn" data-filter="torneo">Torneos</button>
-        <button class="filter-btn" data-filter="formacion">Formación</button>
-        <button class="filter-btn" data-filter="club">Club</button>
-        <button class="filter-btn" data-filter="juvenil">Juvenil</button>
+        <button class="filter-btn active" data-filter="all" id="filter-all">Todas</button>
+        <button class="filter-btn" data-filter="torneo" id="filter-torneo">🏆 Torneos</button>
+        <button class="filter-btn" data-filter="formacion" id="filter-formacion">📚 Formación</button>
+        <button class="filter-btn" data-filter="club" id="filter-club">🏟️ Club</button>
+        <button class="filter-btn" data-filter="juvenil" id="filter-juvenil">⭐ Juvenil</button>
       </div>
 
-      <div class="news-grid-full" id="news-grid">
+      <!-- Noticia destacada + secundaria -->
+      <div class="news-featured-row" id="featured-row">
 
-        <article class="news-card-full" data-cat="torneo" id="news-f1">
-          <div class="ncf-img">
-            <img src="squash_hero.png" alt="Torneo Open CSA" />
-            <span class="news-tag tournament">Torneo</span>
+        <div class="news-card-v2 large" data-cat="torneo" data-news="1" id="card-1" role="button" tabindex="0" aria-label="Abrir noticia: III Torneo Open CSA Algemesí">
+          <div class="ncv2-img">
+            <img src="squash_hero.png" alt="III Torneo Open CSA Algemesí" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag torneo">Torneo</span>
           </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 15 mayo 2026</span></div>
-            <h2 class="ncf-title">Gran éxito en el III Torneo Open CSA Algemesí</h2>
-            <p class="ncf-excerpt">Más de 60 participantes de toda la Comunitat Valenciana se dieron cita en nuestras instalaciones para disputar el torneo más importante de la temporada. Un espectáculo de squash de altísimo nivel que dejó grandes momentos y un ambiente inmejorable entre los aficionados. El campeón de la categoría absoluta fue Marc Ferrer, seguido de cerca por Ana Soler en la categoría femenina.</p>
-            <a href="#" class="news-link">Leer artículo completo →</a>
+          <div class="ncv2-body">
+            <p class="ncv2-date">15 mayo 2026</p>
+            <h2 class="ncv2-title">Gran éxito en el III Torneo Open CSA Algemesí</h2>
+            <p class="ncv2-excerpt">Más de 60 participantes de toda la Comunitat Valenciana se dieron cita en nuestras instalaciones para disputar el torneo más importante de la temporada...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">4 min lectura</span>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="news-card-full" data-cat="formacion" id="news-f2">
-          <div class="ncf-img">
-            <img src="squash_court_1.png" alt="Clases iniciación" />
-            <span class="news-tag training">Formación</span>
-          </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 8 mayo 2026</span></div>
-            <h2 class="ncf-title">Nuevas clases de iniciación para adultos — ¡Plazas disponibles!</h2>
-            <p class="ncf-excerpt">¿Nunca has jugado al squash? ¡Es el momento! Arrancamos una nueva tanda de clases de iniciación todos los martes y jueves de 19:00 a 20:00h. Las clases están dirigidas por nuestro entrenador titulado Jordi Martínez y son perfectas para quien quiera descubrir este deporte desde cero. El material está incluido.</p>
-            <a href="index.html#contacto" class="news-link">Apuntarse →</a>
-          </div>
-        </article>
-
-        <article class="news-card-full" data-cat="club" id="news-f3">
-          <div class="ncf-img">
-            <img src="squash_court_2.png" alt="Renovación pistas" />
-            <span class="news-tag club">Club</span>
-          </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 1 mayo 2026</span></div>
-            <h2 class="ncf-title">Renovación completada: las pistas 3 y 4 estrenan nuevo look</h2>
-            <p class="ncf-excerpt">Tras semanas de trabajo, nuestras pistas 3 y 4 estrenan nuevo suelo de parquet de alta calidad y un sistema de iluminación LED de última generación. La renovación también ha incluido la pintura de las paredes y el reemplazo del sistema de ventilación. Las pistas están disponibles para reserva a partir de esta semana.</p>
-            <a href="#" class="news-link">Leer más →</a>
-          </div>
-        </article>
-
-        <article class="news-card-full" data-cat="juvenil" id="news-f4">
-          <div class="ncf-img">
+        <div class="news-card-v2" data-cat="juvenil" data-news="4" id="card-4" role="button" tabindex="0" aria-label="Abrir noticia: Juveniles subcampeones">
+          <div class="ncv2-img">
             <img src="squash_team.png" alt="Equipo juvenil" />
-            <span class="news-tag youth">Juvenil</span>
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag juvenil">Juvenil</span>
           </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 20 abril 2026</span></div>
-            <h2 class="ncf-title">Nuestros juveniles, brillante subcampeones de la Comunitat</h2>
-            <p class="ncf-excerpt">El equipo junior del CSA Algemesí logró una brillante segunda posición en el Campeonato Autonómico Juvenil celebrado en Valencia. Tres de nuestros jugadores fueron seleccionados para la selección valenciana. Un resultado histórico para el club que demuestra el excelente trabajo de la cantera y el programa de tecnificación.</p>
-            <a href="#" class="news-link">Leer más →</a>
+          <div class="ncv2-body">
+            <p class="ncv2-date">20 abril 2026</p>
+            <h2 class="ncv2-title">Nuestros juveniles, brillantes subcampeones de la Comunitat</h2>
+            <p class="ncv2-excerpt">El equipo junior del CSA Algemesí logró una brillante segunda posición en el Campeonato Autonómico...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">3 min lectura</span>
+            </div>
           </div>
-        </article>
+        </div>
 
-        <article class="news-card-full" data-cat="torneo" id="news-f5">
-          <div class="ncf-img">
-            <img src="squash_court_1.png" alt="Liga interna" />
-            <span class="news-tag tournament">Torneo</span>
-          </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 5 abril 2026</span></div>
-            <h2 class="ncf-title">Liga interna de primavera — Clasificación actualizada</h2>
-            <p class="ncf-excerpt">La liga interna de primavera está en su ecuador y la competición no puede estar más igualada. Con 24 participantes repartidos en 4 grupos, las sorpresas están siendo continuas. Puedes consultar la clasificación actualizada en el tablón de anuncios del club o pidiéndola en recepción.</p>
-            <a href="#" class="news-link">Ver clasificación →</a>
-          </div>
-        </article>
+      </div>
 
-        <article class="news-card-full" data-cat="club" id="news-f6">
-          <div class="ncf-img">
-            <img src="squash_racket.png" alt="Tienda oficial" />
-            <span class="news-tag club">Club</span>
+      <!-- Grid de noticias -->
+      <div class="news-cards-grid" id="news-grid">
+
+        <div class="news-card-v2" data-cat="formacion" data-news="2" id="card-2" role="button" tabindex="0" aria-label="Abrir noticia: Clases de iniciación adultos">
+          <div class="ncv2-img">
+            <img src="pista_real_1.jpg" alt="Clases iniciación adultos" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag formacion">Formación</span>
           </div>
-          <div class="ncf-body">
-            <div class="news-meta"><span class="news-date">📅 15 marzo 2026</span></div>
-            <h2 class="ncf-title">Nueva colección primavera en la tienda oficial del club</h2>
-            <p class="ncf-excerpt">Ya está disponible la nueva colección de primavera en nuestra tienda oficial. Nuevas raquetas Tecnifibre, ropa técnica Head y las codiciadas pelotas Dunlop Pro están esperándote. Los socios premium recuerden que tienen un 10% de descuento en todos los artículos de la tienda.</p>
-            <a href="#" class="news-link">Leer más →</a>
+          <div class="ncv2-body">
+            <p class="ncv2-date">8 mayo 2026</p>
+            <h2 class="ncv2-title">Nuevas clases de iniciación para adultos</h2>
+            <p class="ncv2-excerpt">¿Nunca has jugado al squash? Arrancamos nueva tanda de clases los martes y jueves...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">2 min lectura</span>
+            </div>
           </div>
-        </article>
+        </div>
+
+        <div class="news-card-v2" data-cat="club" data-news="3" id="card-3" role="button" tabindex="0" aria-label="Abrir noticia: Renovación pistas">
+          <div class="ncv2-img">
+            <img src="pista_real_2.jpg" alt="Renovación pistas" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag club">Club</span>
+          </div>
+          <div class="ncv2-body">
+            <p class="ncv2-date">1 mayo 2026</p>
+            <h2 class="ncv2-title">Renovación completada: las pistas estrenan nuevo look</h2>
+            <p class="ncv2-excerpt">Nuevo suelo de parquet y sistema de iluminación LED de última generación...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">2 min lectura</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-card-v2" data-cat="torneo" data-news="5" id="card-5" role="button" tabindex="0" aria-label="Abrir noticia: Liga interna de primavera">
+          <div class="ncv2-img">
+            <img src="squash_racket.png" alt="Liga interna primavera" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag torneo">Torneo</span>
+          </div>
+          <div class="ncv2-body">
+            <p class="ncv2-date">5 abril 2026</p>
+            <h2 class="ncv2-title">Liga interna de primavera — Clasificación actualizada</h2>
+            <p class="ncv2-excerpt">La liga interna está en su ecuador. 24 participantes en 4 grupos con sorpresas continuas...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">2 min lectura</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-card-v2" data-cat="club" data-news="6" id="card-6" role="button" tabindex="0" aria-label="Abrir noticia: Nueva colección tienda">
+          <div class="ncv2-img">
+            <img src="squash_racket.png" alt="Tienda oficial nueva colección" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag club">Club</span>
+          </div>
+          <div class="ncv2-body">
+            <p class="ncv2-date">15 marzo 2026</p>
+            <h2 class="ncv2-title">Nueva colección primavera en la tienda oficial</h2>
+            <p class="ncv2-excerpt">Nuevas raquetas Tecnifibre, ropa técnica Head y las codiciadas pelotas Dunlop Pro...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">1 min lectura</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-card-v2" data-cat="formacion" data-news="7" id="card-7" role="button" tabindex="0" aria-label="Abrir noticia: Clinic con jugador profesional">
+          <div class="ncv2-img">
+            <img src="squash_hero.png" alt="Clinic profesional" />
+            <div class="ncv2-img-overlay"></div>
+            <span class="ncv2-tag formacion">Formación</span>
+          </div>
+          <div class="ncv2-body">
+            <p class="ncv2-date">20 febrero 2026</p>
+            <h2 class="ncv2-title">Clinic con jugador profesional del circuito PSA</h2>
+            <p class="ncv2-excerpt">El próximo mes recibiremos la visita de un jugador del tour profesional que impartirá una sesión exclusiva...</p>
+            <div class="ncv2-footer">
+              <span class="ncv2-read-btn">Leer artículo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <span class="ncv2-time">3 min lectura</span>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -147,7 +575,7 @@
           <p class="footer-tagline">El club de squash de referencia en la Ribera Alta.</p>
         </div>
         <div class="footer-links"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="instalaciones.html">Instalaciones</a></li><li><a href="noticias.html">Noticias</a></li><li><a href="equipo.html">Equipo</a></li><li><a href="subvenciones.html">Subvenciones</a></li></ul></div>
-        <div class="footer-links"><h4>Club</h4><ul><li><a href="#">Junta directiva</a></li><li><a href="#">Historia</a></li><li><a href="#">Federació Valenciana</a></li></ul></div>
+        <div class="footer-links"><h4>Club</h4><ul><li><a href="equipo.html">Equipo técnico</a></li><li><a href="#">Historia</a></li><li><a href="#">Federació Valenciana</a></li></ul></div>
         <div class="footer-newsletter"><h4>Newsletter</h4><p>Recibe noticias y torneos en tu correo.</p><form class="newsletter-form" novalidate><input type="email" placeholder="tu@email.com" /><button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></form></div>
       </div>
     </div>
@@ -155,21 +583,180 @@
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+  <!-- ══════════════ MODAL ══════════════ -->
+  <div class="news-modal-overlay" id="news-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div class="news-modal" id="news-modal">
+      <div class="modal-img-wrap">
+        <img src="" alt="" id="modal-img" />
+        <span class="modal-img-tag ncv2-tag" id="modal-tag"></span>
+        <button class="modal-close" id="modal-close-btn" aria-label="Cerrar noticia">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span class="modal-date" id="modal-date"></span>
+          <span class="modal-read-time" id="modal-read-time"></span>
+        </div>
+        <h2 class="modal-title" id="modal-title-text"></h2>
+        <div class="modal-divider"></div>
+        <div class="modal-content" id="modal-content"></div>
+        <div class="modal-actions">
+          <a href="equipo.html" class="btn-primary" id="modal-cta">Contactar con el club</a>
+          <button class="btn-outline" id="modal-close-btn-2">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
-    // News filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const newsCards = document.querySelectorAll('.news-card-full');
-    filterBtns.forEach(btn => {
+    // ── Datos de noticias ──
+    const newsData = {
+      1: {
+        tag: 'torneo', tagLabel: 'Torneo', img: 'squash_hero.png',
+        date: '15 mayo 2026', readTime: '4 min lectura',
+        title: 'Gran éxito en el III Torneo Open CSA Algemesí',
+        content: `
+          <p>El pasado fin de semana, el Club Squash Algemesí vivió uno de sus días más especiales. <strong>Más de 60 participantes</strong> procedentes de toda la Comunitat Valenciana se dieron cita en nuestras instalaciones para disputar el III Torneo Open CSA Algemesí, la cita más importante de nuestra temporada.</p>
+          <p>La competición se desarrolló en tres categorías: absoluta masculina, absoluta femenina y sub-19. Los cuatro cuadros se llenaron de squash de altísimo nivel, con partidos que mantuvieron en vilo a un buen número de espectadores que se acercaron a animar a sus jugadores favoritos.</p>
+          <p>En la categoría absoluta masculina, el campeón fue <strong>Marc Ferrer</strong>, nuestro propio entrenador, que demostró por qué sigue siendo uno de los mejores jugadores de la región. En la categoría femenina, la victoria fue para <strong>Ana Soler</strong>, en un final emocionante que llegó al quinto set.</p>
+          <p>Desde el club queremos agradecer a todos los participantes, a los voluntarios y al público que hizo posible este torneo. ¡Hasta la próxima edición!</p>
+        `
+      },
+      2: {
+        tag: 'formacion', tagLabel: 'Formación', img: 'pista_real_1.jpg',
+        date: '8 mayo 2026', readTime: '2 min lectura',
+        title: 'Nuevas clases de iniciación para adultos — ¡Plazas disponibles!',
+        content: `
+          <p>¿Siempre has querido probar el squash pero nunca has encontrado el momento? <strong>¡Este es tu momento!</strong> El Club Squash Algemesí abre una nueva tanda de clases de iniciación especialmente diseñadas para adultos sin experiencia previa.</p>
+          <p>Las clases se celebrarán todos los <strong>martes y jueves de 19:00 a 20:00h</strong>, dirigidas por nuestro entrenador titulado Jordi Martínez. El programa incluye los fundamentos del squash, técnica básica, normas del juego y partidos supervisados.</p>
+          <p>El material está incluido en el precio: no necesitas raqueta propia para empezar. Las plazas son limitadas a 8 personas por grupo para garantizar una atención personalizada.</p>
+          <p>Para apuntarse, contacta con nosotros en recepción o escríbenos al email del club. <strong>¡No lo dejes pasar!</strong></p>
+        `
+      },
+      3: {
+        tag: 'club', tagLabel: 'Club', img: 'pista_real_2.jpg',
+        date: '1 mayo 2026', readTime: '2 min lectura',
+        title: 'Renovación completada: las pistas estrenan nuevo look',
+        content: `
+          <p>Tras semanas de trabajo e inversión, nos complace anunciar que <strong>las obras de renovación de nuestras instalaciones han concluido</strong> satisfactoriamente. El resultado ha superado todas las expectativas.</p>
+          <p>Los cambios más destacados incluyen un nuevo suelo de parquet de alta calidad, con mayor amortiguación y mejor respuesta al juego, y un sistema de iluminación LED de última generación que mejora significativamente la visibilidad en pista.</p>
+          <p>Además, se ha renovado el sistema de ventilación para garantizar una temperatura óptima durante todo el año, independientemente de las condiciones exteriores.</p>
+          <p>Todas las pistas están ya disponibles para reserva. <strong>¡Ven a probarlas!</strong></p>
+        `
+      },
+      4: {
+        tag: 'juvenil', tagLabel: 'Juvenil', img: 'squash_team.png',
+        date: '20 abril 2026', readTime: '3 min lectura',
+        title: 'Nuestros juveniles, brillantes subcampeones de la Comunitat',
+        content: `
+          <p>El equipo junior del CSA Algemesí ha escrito una de las páginas más brillantes de la historia del club al conseguir la <strong>segunda posición en el Campeonato Autonómico Juvenil</strong> celebrado en Valencia.</p>
+          <p>Con jugadores de entre 14 y 17 años, nuestros jóvenes han demostrado un nivel de juego excepcional a lo largo de toda la competición, superando a equipos de clubs con mucho mayor presupuesto y tradición.</p>
+          <p>Tres de nuestros jugadores han sido seleccionados para formar parte de la <strong>selección valenciana sub-18</strong>, un reconocimiento al extraordinario trabajo realizado tanto por los propios jugadores como por nuestra entrenadora Ana Soler.</p>
+          <p>Este resultado avala el modelo de trabajo de nuestra escuela base y demuestra que, cuando se hace bien, el squash de base puede generar campeones. <strong>¡Enhorabuena a todos!</strong></p>
+        `
+      },
+      5: {
+        tag: 'torneo', tagLabel: 'Torneo', img: 'squash_racket.png',
+        date: '5 abril 2026', readTime: '2 min lectura',
+        title: 'Liga interna de primavera — Clasificación actualizada',
+        content: `
+          <p>La <strong>Liga Interna de Primavera 2026</strong> está en su punto más emocionante. Con 24 participantes distribuidos en 4 grupos de 6 jugadores, la competición no puede estar más igualada en todos los grupos.</p>
+          <p>En el Grupo A destaca la irrupción de un jugador de la escuela base que está siendo la sorpresa de la temporada. En el Grupo B, la lucha entre los tres primeros clasificados está siendo épica, con diferencias de apenas un punto entre ellos.</p>
+          <p>Los partidos se juegan todos los miércoles a partir de las 20:00h. Puedes consultar la clasificación actualizada en el <strong>tablón de anuncios del club</strong> o preguntando en recepción.</p>
+          <p>La final está prevista para finales de junio. ¡Ven a animar!</p>
+        `
+      },
+      6: {
+        tag: 'club', tagLabel: 'Club', img: 'squash_racket.png',
+        date: '15 marzo 2026', readTime: '1 min lectura',
+        title: 'Nueva colección primavera en la tienda oficial',
+        content: `
+          <p>Nuestra tienda oficial se ha renovado para la temporada de primavera. Ya están disponibles las <strong>nuevas raquetas Tecnifibre Carboflex</strong>, las favoritas del circuito profesional, así como la colección de ropa técnica Head Performance para hombre y mujer.</p>
+          <p>También hemos recibido el nuevo stock de <strong>pelotas Dunlop Pro</strong>, las más utilizadas en competición, y los grips Karakal PU Super Grip que tantos de vosotros nos habíais pedido.</p>
+          <p>Recuerda que los socios premium tienen un <strong>10% de descuento</strong> en todos los artículos de la tienda. ¡Pásate a verlo!</p>
+        `
+      },
+      7: {
+        tag: 'formacion', tagLabel: 'Formación', img: 'squash_hero.png',
+        date: '20 febrero 2026', readTime: '3 min lectura',
+        title: 'Clinic con jugador profesional del circuito PSA',
+        content: `
+          <p>El próximo mes el CSA Algemesí recibirá la visita de <strong>un jugador profesional del circuito PSA World Tour</strong> que impartirá una sesión clínica exclusiva para nuestros socios.</p>
+          <p>La sesión, de tres horas de duración, incluirá una demostración técnica, análisis de puntos clave del juego profesional y una sesión de preguntas y respuestas. Se habilitarán plazas tanto para jugadores de nivel intermedio como avanzado.</p>
+          <p>Esta es una oportunidad única de aprender directamente de alguien que compite en el más alto nivel mundial. <strong>Las plazas son muy limitadas</strong>, así que si estás interesado contacta cuanto antes con el club para reservar tu sitio.</p>
+          <p>Más información sobre fecha exacta y nombre del jugador próximamente en nuestras redes sociales.</p>
+        `
+      }
+    };
+
+    // ── Modal logic ──
+    const overlay   = document.getElementById('news-modal-overlay');
+    const modal     = document.getElementById('news-modal');
+    const closeBtn  = document.getElementById('modal-close-btn');
+    const closeBtn2 = document.getElementById('modal-close-btn-2');
+
+    function openModal(newsId) {
+      const d = newsData[newsId];
+      if (!d) return;
+
+      document.getElementById('modal-img').src = d.img;
+      document.getElementById('modal-img').alt = d.title;
+      const tagEl = document.getElementById('modal-tag');
+      tagEl.textContent = d.tagLabel;
+      tagEl.className = `modal-img-tag ncv2-tag ${d.tag}`;
+      document.getElementById('modal-date').textContent = '📅 ' + d.date;
+      document.getElementById('modal-read-time').textContent = '⏱ ' + d.readTime;
+      document.getElementById('modal-title-text').textContent = d.title;
+      document.getElementById('modal-content').innerHTML = d.content;
+      modal.scrollTop = 0;
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    closeBtn2.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Attach to all cards
+    document.querySelectorAll('.news-card-v2').forEach(card => {
+      const open = () => openModal(Number(card.dataset.news));
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
+    });
+
+    // ── Filter logic ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-        newsCards.forEach(card => {
+
+        const featuredRow = document.getElementById('featured-row');
+        const allCards = document.querySelectorAll('.news-card-v2');
+
+        allCards.forEach(card => {
           const show = filter === 'all' || card.dataset.cat === filter;
           card.style.display = show ? '' : 'none';
-          card.style.animation = show ? 'fadeUp 0.4s ease' : '';
         });
+
+        // Hide featured row if no cards match in it
+        if (filter !== 'all') {
+          const visibleFeatured = [...featuredRow.querySelectorAll('.news-card-v2')]
+            .filter(c => c.style.display !== 'none');
+          featuredRow.style.display = visibleFeatured.length ? '' : 'none';
+        } else {
+          featuredRow.style.display = '';
+        }
       });
     });
   </script>
