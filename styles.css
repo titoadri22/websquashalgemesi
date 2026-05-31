@@ -269,9 +269,11 @@ img { display: block; max-width: 100%; }
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 700px;
-  padding: 120px 24px 80px;
-  margin-left: calc((100vw - 1200px) / 2);
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 24px;
+  margin: 0 auto;
+  text-align: center;
   animation: fadeUp 1s ease both;
 }
 
@@ -1573,7 +1575,7 @@ img { display: block; max-width: 100%; }
   }
 
   .hero-content {
-    margin-left: 24px;
+    /* Centering maintained */
   }
 }
 
@@ -1659,8 +1661,7 @@ img { display: block; max-width: 100%; }
   }
 
   .hero-content {
-    margin-left: 0;
-    padding: 100px 24px 60px;
+    padding: 80px 24px 60px;
   }
 
   .hero-stats {
