@@ -4,15 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instalaciones | Club Squash Algemesí</title>
-  <meta name="description" content="Conoce las instalaciones del Club Squash Algemesí: 4 pistas profesionales, vestuarios premium, sala de fitness y más." />
+  <meta name="description" content="Instalaciones del Club Squash Algemesí en el Polideportivo de Algemesí. 3 pistas de squash homologadas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .install-intro {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 56px;
+    }
+
+    .install-intro .section-tag {
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .install-intro h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .install-intro p {
+      font-size: 1.05rem;
+      color: rgba(240,253,244,0.6);
+      line-height: 1.7;
+    }
+
+    .install-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green-400);
+      margin-top: 16px;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .photo-box {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      position: relative;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-box:hover img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 640px) {
+      .photos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
   <nav class="navbar scrolled" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
@@ -20,226 +87,52 @@
         <span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span>
       </a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="nav-link" id="link-home">Inicio</a></li>
-        <li><a href="instalaciones.html" class="nav-link active" id="link-install">Instalaciones</a></li>
-        <li><a href="noticias.html" class="nav-link" id="link-news">Noticias</a></li>
-        <li><a href="equipo.html" class="nav-link" id="link-equipo">Equipo</a></li>
-        <li><a href="subvenciones.html" class="nav-link" id="link-subs">Subvenciones</a></li>
+        <li><a href="index.html" class="nav-link">Inicio</a></li>
+        <li><a href="instalaciones.html" class="nav-link active">Instalaciones</a></li>
+        <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+        <li><a href="equipo.html" class="nav-link">Equipo</a></li>
+        <li><a href="subvenciones.html" class="nav-link">Subvenciones</a></li>
       </ul>
-      <a href="index.html#contacto" class="nav-cta" id="nav-cta-btn">Únete al club</a>
+      <a href="equipo.html" class="nav-cta">Únete al club</a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- ===== PAGE HEADER ===== -->
-  <header class="page-header">
-    <div class="page-header-bg">
-      <img src="pista_real_1.jpg" alt="Pistas Club Squash Algemesí" class="page-header-img" />
-      <div class="page-header-overlay"></div>
-    </div>
-    <div class="container page-header-content">
-      <div class="breadcrumb">
-        <a href="index.html">Inicio</a>
-        <span>/</span>
-        <span>Instalaciones</span>
-      </div>
-      <h1 class="page-title">Nuestras <span class="gradient-text">Instalaciones</span></h1>
-      <p class="page-subtitle">4 pistas homologadas, vestuarios premium y todo lo que necesitas para jugar al más alto nivel.</p>
-    </div>
-  </header>
-
-  <!-- ===== GALERÍA DE PISTAS ===== -->
-  <section class="section" id="pistas">
+  <section class="section" id="instalaciones" style="padding-top: 120px;">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Pistas de squash</span>
-        <h2 class="section-title">3 pistas <span class="gradient-text">de competición</span></h2>
-        <p class="section-desc">Todas homologadas por la Federación Española de Squash. Amplias, luminosas y preparadas para el más alto nivel.</p>
-      </div>
 
-      <!-- Pista principal grande -->
-      <div class="court-feature" id="court-main">
-        <div class="court-feature-img">
-          <img src="pista_real_1.jpg" alt="Pistas Club Squash Algemesí" />
-          <div class="court-num-badge">Pistas 1 & 2</div>
-        </div>
-        <div class="court-feature-info">
-          <span class="section-tag">Vista general</span>
-          <h3>Tres pistas con<br/>paredes de cristal</h3>
-          <p>Nuestras instalaciones cuentan con pistas de cristal templado de seguridad, suelo de madera noble y amplio espacio exterior para calentar y descansar entre partidos.</p>
-          <div class="court-specs">
-            <div class="spec-item">
-              <span class="spec-icon">📐</span>
-              <div><strong>Dimensiones</strong><span>9,75m × 6,4m (WSF)</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">💡</span>
-              <div><strong>Iluminación</strong><span>LED 500 lux profesional</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">🌡️</span>
-              <div><strong>Climatización</strong><span>Sistema individual por pista</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">🪵</span>
-              <div><strong>Suelo</strong><span>Parquet de madera noble</span></div>
-            </div>
-          </div>
+      <div class="install-intro">
+        <span class="section-tag">Instalaciones</span>
+        <h1>Nuestras <span class="gradient-text">pistas</span></h1>
+        <p>El Club Squash Algemesí se encuentra en el <strong style="color:var(--text-primary)">Polideportivo Municipal de Algemesí</strong>, con 3 pistas de squash amplias, luminosas y listas para jugar al más alto nivel.</p>
+        <div class="install-location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Polideportivo Municipal de Algemesí, Valencia
         </div>
       </div>
 
-      <!-- Pistas 3 y 4 -->
-      <div class="court-feature reverse" id="court-secondary">
-        <div class="court-feature-img">
-          <img src="pista_real_2.jpg" alt="Interior instalaciones CSA Algemesí" />
-          <div class="court-num-badge">Pista 3</div>
+      <div class="photos-grid" id="photos-grid">
+        <div class="photo-box" id="photo-pistas-1">
+          <img src="pista_real_1.jpg" alt="Pistas de squash Club Algemesí — vista general" />
         </div>
-        <div class="court-feature-info">
-          <span class="section-tag">Instalaciones</span>
-          <h3>Espacio amplio,<br/>luz natural</h3>
-          <p>El recinto cuenta con grandes ventanales que inundan la zona de espectadores de luz natural. Amplias zonas de descanso y calentamiento alrededor de las pistas para que nada te distraiga del juego.</p>
-          <div class="court-specs">
-            <div class="spec-item">
-              <span class="spec-icon">✨</span>
-              <div><strong>Renovación</strong><span>Enero 2026 — totalmente nuevas</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">🏅</span>
-              <div><strong>Homologación</strong><span>Federación Española de Squash</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">📱</span>
-              <div><strong>Reserva</strong><span>App y web 24h con anticipación</span></div>
-            </div>
-            <div class="spec-item">
-              <span class="spec-icon">🎾</span>
-              <div><strong>Uso</strong><span>Libre y clases de grupo</span></div>
-            </div>
-          </div>
+        <div class="photo-box" id="photo-pistas-2">
+          <img src="pista_real_2.jpg" alt="Interior pistas Club Squash Algemesí" />
         </div>
       </div>
 
-      <!-- Galería adicional -->
-      <div class="gallery-section">
-        <h3 class="gallery-title">Más espacios del club</h3>
-        <div class="gallery-grid">
-          <div class="gallery-item tall" id="gallery-real1">
-            <img src="pista_real_1.jpg" alt="Vista general pistas CSA Algemesí" />
-            <div class="gallery-overlay">
-              <span class="gallery-label">Vista general pistas</span>
-            </div>
-          </div>
-          <div class="gallery-item" id="gallery-real2">
-            <img src="pista_real_2.jpg" alt="Instalaciones CSA Algemesí" />
-            <div class="gallery-overlay">
-              <span class="gallery-label">Interior instalaciones</span>
-            </div>
-          </div>
-          <div class="gallery-item" id="gallery-hero">
-            <img src="squash_hero.png" alt="Partido en el club" />
-            <div class="gallery-overlay">
-              <span class="gallery-label">Partido oficial</span>
-            </div>
-          </div>
-          <div class="gallery-item" id="gallery-racket">
-            <img src="squash_racket.png" alt="Equipamiento tienda oficial" />
-            <div class="gallery-overlay">
-              <span class="gallery-label">Tienda oficial</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ===== SERVICIOS ===== -->
-  <section class="section section-alt" id="servicios">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Todo incluido</span>
-        <h2 class="section-title">Servicios e <span class="gradient-text">instalaciones</span></h2>
-        <p class="section-desc">Además de las pistas, contamos con todo lo necesario para que tu visita sea perfecta.</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card" id="srv-vestuarios">
-          <div class="service-img"><img src="squash_locker.png" alt="Vestuarios" /></div>
-          <div class="service-body">
-            <div class="service-icon">🚿</div>
-            <h3>Vestuarios Premium</h3>
-            <p>Amplios vestuarios con duchas de agua caliente, taquillas digitales con clave personal, secadores de pelo y zona de aseo completa.</p>
-            <ul class="service-list">
-              <li>Duchas individuales con cabina</li>
-              <li>Taquillas digitales seguras</li>
-              <li>Zona de descanso post-partido</li>
-              <li>Servicio de toallas (socios premium)</li>
-            </ul>
-          </div>
-        </div>
-        <div class="service-card" id="srv-gym">
-          <div class="service-body" style="padding: 32px;">
-            <div class="service-icon">💪</div>
-            <h3>Sala de Fitness</h3>
-            <p>Zona de calentamiento y acondicionamiento físico específica para squash. Bicicletas estáticas, cintas, máquinas de musculación y zona de estiramientos.</p>
-            <ul class="service-list">
-              <li>Equipamiento cardiovascular</li>
-              <li>Zona de pesas libres</li>
-              <li>Máquinas de musculación</li>
-              <li>Zona de estiramientos y yoga</li>
-            </ul>
-          </div>
-          <div class="service-body" style="background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(74,222,128,0.05)); border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: 24px 32px;">
-            <div class="service-icon">☕</div>
-            <h3>Cafetería Social</h3>
-            <p>El punto de encuentro del club. Bebidas isotónicas, smoothies, snacks saludables y la mejor tertulia de squash de la Ribera Alta.</p>
-          </div>
-        </div>
-        <div class="service-card" id="srv-tienda">
-          <div class="service-body" style="padding: 32px;">
-            <div class="service-icon">🛍️</div>
-            <h3>Tienda Oficial</h3>
-            <p>Equipamiento de Tecnifibre, Head, Dunlop y Wilson disponible en nuestra tienda. Asesoramiento personalizado gratuito para socios.</p>
-            <ul class="service-list">
-              <li>Venta de raquetas y cuerdas</li>
-              <li>Alquiler de raquetas desde 2€</li>
-              <li>Encordado profesional en 48h</li>
-              <li>10% dto. para socios premium</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="section cta-section" id="cta-install">
-    <div class="container">
-      <div class="cta-box">
-        <div class="cta-content">
-          <h2>¿Quieres reservar una pista?</h2>
-          <p>Socios pueden reservar hasta 48h con antelación desde la web o llamando al club.</p>
-        </div>
-        <div class="cta-actions">
-          <a href="index.html#contacto" class="btn-primary" id="cta-contact-btn">Contactar con el club</a>
-          <a href="index.html#horarios" class="btn-outline" id="cta-prices-btn">Ver tarifas</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer" id="footer">
+  <footer class="footer">
     <div class="footer-top">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="nav-logo">
-            <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg2)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div>
-            <span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span>
-          </a>
-          <p class="footer-tagline">El club de squash de referencia en la Ribera Alta. Más de 25 años formando campeones y construyendo comunidad.</p>
+          <a href="index.html" class="nav-logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#lg2)" stroke-width="2"/><path d="M10 28 Q15 10 20 20 Q25 30 30 12" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="28" cy="26" r="3" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs></svg></div><span class="logo-text">CSA <span class="logo-accent">Algemesí</span></span></a>
+          <p class="footer-tagline">El club de squash de referencia en la Ribera Alta.</p>
         </div>
         <div class="footer-links"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="instalaciones.html">Instalaciones</a></li><li><a href="noticias.html">Noticias</a></li><li><a href="equipo.html">Equipo</a></li><li><a href="subvenciones.html">Subvenciones</a></li></ul></div>
-        <div class="footer-links"><h4>Club</h4><ul><li><a href="#">Junta directiva</a></li><li><a href="#">Historia del club</a></li><li><a href="#">Reglamento interno</a></li><li><a href="#">Federació Valenciana</a></li></ul></div>
-        <div class="footer-newsletter"><h4>Newsletter</h4><p>Recibe noticias, torneos y ofertas del club en tu correo.</p><form class="newsletter-form" novalidate><input type="email" placeholder="tu@email.com" /><button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></form></div>
+        <div class="footer-links"><h4>Club</h4><ul><li><a href="#">Historia</a></li><li><a href="#">Federació Valenciana</a></li></ul></div>
+        <div class="footer-newsletter"><h4>Newsletter</h4><p>Recibe noticias y torneos en tu correo.</p><form class="newsletter-form" novalidate><input type="email" placeholder="tu@email.com" /><button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></form></div>
       </div>
     </div>
     <div class="footer-bottom"><div class="container footer-bottom-inner"><p>© 2026 Club Squash Algemesí. Tots els drets reservats.</p><div class="footer-legal"><a href="#">Política de privacidad</a><a href="#">Aviso legal</a></div></div></div>
