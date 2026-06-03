@@ -1557,11 +1557,12 @@ img { display: block; max-width: 100%; }
   margin-top: 32px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .home-install-grid.three-cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
-}
+
+  .install-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1576,6 +1577,12 @@ img { display: block; max-width: 100%; }
 
   .hero-content {
     /* Centering maintained */
+  }
+}
+
+@media (max-width: 768px) {
+  .home-install-grid.three-cols {
+    grid-template-columns: 1fr;
   }
 }
 
